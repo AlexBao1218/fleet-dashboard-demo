@@ -16,8 +16,8 @@
 | 位置 | 地址 |
 |---|---|
 | 本地 | `~/Desktop/fleet-dashboard-demo` |
-| GitHub | https://github.com/AlexBao1218/fleet-dashboard-demo（目前 **private**，确认没问题后再改 public） |
-| 线上 | 未部署，计划 `dashboard-demo.zijun.cloud` |
+| GitHub | https://github.com/AlexBao1218/fleet-dashboard-demo（public） |
+| 线上 | https://dashboard-demo.zijun.cloud（Vercel `alexbaos-projects/fleet-dashboard-demo`，别名 fleet-dashboard-demo.vercel.app） |
 | 原始导出包 | `~/Downloads/dashboard.zip`（含 AGENTS.md 里的内部设计说明和原 README，不要上传到任何地方） |
 
 ### 原导出包里的凭证
@@ -63,11 +63,13 @@ cd ~/Desktop/fleet-dashboard-demo && gh repo edit --visibility public --accept-v
 
 ### 部署到 Vercel
 
+已部署（2026-09-17）。重新发布：
+
 ```bash
-cd ~/Desktop/fleet-dashboard-demo && vercel --prod
+cd ~/Desktop/fleet-dashboard-demo && vercel --prod --scope alexbaos-projects
 ```
 
-项目名用 `fleet-dashboard-demo`，team 选 `alexbaos-projects`。`vercel.json` 已配 SPA 重写。部署完在项目 Domains 加 `dashboard-demo.zijun.cloud`，DNSPod 加 CNAME `dashboard-demo` → `cname.vercel-dns.com`（本机 tccli 可以直接写，见 memory `vercel-accounts`）。
+域名 `dashboard-demo.zijun.cloud` 已绑定并验证（DNSPod CNAME → cname.vercel-dns.com，`_vercel` TXT）。
 
 ### 放进 zijun.cloud
 
