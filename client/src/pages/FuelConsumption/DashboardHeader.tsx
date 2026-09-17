@@ -4,6 +4,7 @@ import { logger } from '@lark-apaas/client-toolkit/logger';
 import { getDataCutoff } from '@client/src/api/dashboard';
 import type { MakeModelOptionItem } from '@shared/dashboard';
 import { Label } from '@client/src/components/ui/label';
+import { SyntheticBadge } from '@client/src/components/SyntheticBadge';
 import {
   Select,
   SelectContent,
@@ -83,8 +84,9 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           <h1 className="text-[22px] font-bold leading-7 text-[#084078]">
             Fuel Consumption
           </h1>
-          <p className="mt-1 text-[12px] text-muted-foreground">
+          <p className="mt-1 flex items-center gap-2 text-[12px] text-muted-foreground">
             Data up to {cutoffMonth ?? '—'}
+            <SyntheticBadge />
           </p>
         </div>
         <div className="flex flex-wrap items-end gap-4">

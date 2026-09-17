@@ -41,7 +41,7 @@ export interface ManualEntryCardProps {
 }
 
 const MANUAL_HINT =
-  'Supplier B 和 Supplier C 每月只有十几笔，在此逐笔录入。从 2026 年 9 月起填写；2026 年 8 月及之前的已由历史导入覆盖。同一供应商同一单据号再次提交会覆盖原记录。';
+  'Supplier B 和 Supplier C 每月只有十几笔，在此逐笔录入。同一供应商同一单据号再次提交会覆盖原记录。';
 
 const manualEntrySchema = z.object({
   supplier: z.enum(['Supplier B', 'Supplier C'], {

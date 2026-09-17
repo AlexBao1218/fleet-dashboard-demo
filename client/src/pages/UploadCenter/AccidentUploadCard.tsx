@@ -18,10 +18,10 @@ export interface AccidentUploadCardProps {
   onUploaded: () => Promise<void>;
 }
 
-const EXPECTED_FILE_NAME = 'Accident BI.xlsx';
+const EXPECTED_FILE_NAME = 'Accident_Register.xlsx';
 
 const ACCIDENT_HINT =
-  "上传事故记录表 Accident BI.xlsx。只读取 sheet 'Record 2026'（含 2025 年起全部记录）。每月更新后整份上传覆盖。";
+  "上传事故登记表（.xlsx）。每月更新后整份上传覆盖。";
 
 const isXlsxFile = (file: File): boolean => {
   return file.name.toLowerCase().endsWith('.xlsx');

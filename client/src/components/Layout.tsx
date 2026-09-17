@@ -1,8 +1,8 @@
-import { CarTaxiFront, Database, ExternalLink, Gauge, RotateCcw, Truck, UserRound, Wrench } from "lucide-react";
+import { CarTaxiFront, Database, Gauge, RotateCcw, Truck, UserRound, Wrench } from "lucide-react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 
 import { useCurrentUserProfile } from "@lark-apaas/client-toolkit/hooks/useCurrentUserProfile";
-import { CASE_STUDY_URL, DEMO_LABEL, PROGRAM_NAME, PROGRAM_TAGLINE } from "@/lib/brand";
+import { DEMO_LABEL, PROGRAM_NAME, PROGRAM_TAGLINE } from "@/lib/brand";
 import { resetDemoData } from "@/platform/store";
 
 import {
@@ -110,14 +110,6 @@ const LayoutContent = () => {
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip="Case study" className={NAV_BUTTON_CLASS}>
-                <a href={CASE_STUDY_URL} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="size-4" />
-                  <span>Case study</span>
-                </a>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
               <SidebarMenuButton size="lg" asChild>
                 <div className="flex items-center gap-2">
                   <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-accent text-muted-foreground">
@@ -129,11 +121,11 @@ const LayoutContent = () => {
                   <button
                     type="button"
                     onClick={handleReset}
-                    title="Restore the synthetic dataset"
+                    title="Discard your edits and reload the seeded dataset"
                     className="ml-auto flex items-center gap-1 rounded px-1 text-xs text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 group-data-[collapsible=icon]:hidden"
                   >
                     <RotateCcw className="size-3" />
-                    Reset data
+                    Reset demo
                   </button>
                 </div>
               </SidebarMenuButton>

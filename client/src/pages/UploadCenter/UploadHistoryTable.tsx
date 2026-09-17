@@ -6,6 +6,7 @@ import {
 } from '@lark-apaas/client-toolkit/antd-table';
 
 import type { UploadLog } from '@shared/upload-log';
+import { Redacted } from '@client/src/components/Redacted';
 
 export interface UploadHistoryTableProps {
   items: UploadLog[];
@@ -40,6 +41,7 @@ const columns: TableColumnsType<UploadLog> = [
     dataIndex: 'uploadedBy',
     key: 'uploadedBy',
     width: 140,
+    render: () => <Redacted short />,
   },
   {
     title: 'Rows read',

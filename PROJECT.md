@@ -30,7 +30,7 @@
 cd ~/Desktop/fleet-dashboard-demo && npm run dev
 ```
 
-打开 http://localhost:4200。四个页面：`/fuel-consumption`、`/maintenance`、`/accident`、`/data-management`（`?tab=upload|manual|reference|history|about`）。侧边栏底部 **Reset data** 一键还原合成数据。
+打开 http://localhost:4200。四个页面：`/fuel-consumption`、`/maintenance`、`/accident`、`/data-management`（`?tab=upload|manual|reference|history|about`）。侧边栏底部 **Reset demo** 丢掉你在浏览器里的改动（手工录入、映射表、About 编辑），重新载入固定种子的数据——每次都是同一组，不是随机的。
 
 生产构建检查：
 
@@ -43,7 +43,9 @@ cd ~/Desktop/fleet-dashboard-demo && npm run typecheck && npm run lint && npm ru
 - 全部数字由 `client/src/platform/seed.ts` 用固定种子生成：40 辆车（Private Car 14 / Van 12 / Lorry 8 / Motorcycle 6）、2025-01 到 2026-08 的加油、行驶、EV 用电、维修工单、事故记录。量级、比例都是编的，和真实车队无关。
 - 名字：程序叫 **Fleet Dashboard**，公司名不出现；油卡供应商 `Fuel Card Supplier A`，手工录入两家 `Supplier B / C`；维修厂 `Depot A / B`；第三方维修商 `Vendor 01–12`；车牌 `DEMO 101–142`；工单号 `YYYYMM-00001`；上传人 `Demo user`。
 - 保留：车型四类、事故四类、月份轴、图表形状、油品映射表结构、上传历史表结构。
-- 侧边栏写着 "Public demo · synthetic data"，About 页第一段也说明数据是合成的。
+- 每块看板 "Data up to" 旁边有 **Synthetic data** 小标签（悬停有说明），侧边栏写着 "Public demo · synthetic data"，About 页第一段也说明数据是合成的。
+- 灰条 `Redacted for public demo`（`components/Redacted.tsx`）用在真实系统里会是真名字的位置：上传人、第三方维修商（图上只留排名 #1–#15）。
+- 原提示文字里的内部流程细节（账户数、上线时间线、内部文件名/sheet 名、维修数据起始年份）已删。
 
 想换成"只留结构"，改 `client/src/lib/brand.ts` 和 `seed.ts` 即可，页面代码不用动。
 
@@ -114,9 +116,12 @@ client/src/
   platform/system-guide.ts  markdown shown on the About tab
   platform/store.ts       localStorage persistence (key fleet-dashboard-demo:store), resetDemoData()
   lib/brand.ts            PROGRAM_NAME, SUPPLIERS, DEPOTS, NOT_AVAILABLE, CASE_STUDY_URL
-  components/Layout.tsx   sidebar: branding, nav, Case study link, Reset data
-  pages/                  original page code; edits limited to renames, the ThirdParty axis
-                          (now data-driven) and nothing else
+  components/Layout.tsx   sidebar: branding, nav, Reset demo
+  components/Redacted.tsx grey bar for withheld record-level values (uploader, vendor names)
+  components/SyntheticBadge.tsx  "Synthetic data" chip beside each dashboard's cutoff
+  pages/                  original page code; edits limited to renames, the ThirdParty chart
+                          (data-driven axis, ranked grey bars for vendors), the Synthetic chip,
+                          scrubbed hint copy and the maintenance year list
   api/                    original client API layer, untouched except renames
 shared/                   original shared types, renamed
 docs/                     case study EN/ZH, portfolio blurb

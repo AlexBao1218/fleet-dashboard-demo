@@ -16,6 +16,7 @@ import {
   TooltipTrigger,
 } from '@client/src/components/ui/tooltip';
 import { fmtCompact2, fmtNumber } from '@client/src/utils/format';
+import { SyntheticBadge } from '@client/src/components/SyntheticBadge';
 
 import { CARD_BORDER } from './maintColors';
 
@@ -26,7 +27,7 @@ function fmtCompact3(value: number): string {
   return fmtNumber(value, 0);
 }
 
-const YEAR_OPTIONS = [2026, 2025, 2024, 2023, 2022, 2021, 2020];
+const YEAR_OPTIONS = [2026, 2025];
 
 const QUARTER_OPTIONS: { value: string; label: string }[] = [
   { value: 'all', label: 'All' },
@@ -133,8 +134,9 @@ export const MaintenanceHeaderLeft: React.FC<MaintenanceHeaderLeftProps> = ({
     <div className="flex flex-wrap items-start gap-x-8 gap-y-4">
       <div className="flex min-w-[150px] flex-col">
         <h1 className="text-[22px] font-bold leading-7 text-[#084078]">Maintenance</h1>
-        <p className="mt-1 text-[12px] text-muted-foreground">
+        <p className="mt-1 flex items-center gap-2 text-[12px] text-muted-foreground">
           Data up to {cutoff ?? '—'}
+          <SyntheticBadge />
         </p>
       </div>
 

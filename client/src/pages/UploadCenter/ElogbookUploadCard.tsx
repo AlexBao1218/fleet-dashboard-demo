@@ -19,7 +19,7 @@ export interface ElogbookUploadCardProps {
 }
 
 const ELOGBOOK_HINT =
-  '上传 elogbook 系统导出的 Vehicle Transaction Report（.xlsx）。每月导出当月即可，重叠的记录会被覆盖。';
+  '上传行驶日志系统导出的行程报表（.xlsx）。每月导出当月即可，重叠的记录会被覆盖。';
 
 const isXlsxFile = (file: File): boolean => {
   return file.name.toLowerCase().endsWith('.xlsx');

@@ -19,7 +19,7 @@ export interface FuelCardUploadCardProps {
 }
 
 const FUEL_CARD_HINT =
-  '上传油卡供应商（Supplier A）卡中心导出的月度交易文件。两个账户各一份，分别上传。同一单据重复上传会被覆盖。';
+  '上传油卡供应商导出的月度交易文件。同一单据重复上传会被覆盖。';
 
 const isCsvFile = (file: File): boolean => {
   return file.name.toLowerCase().endsWith('.csv');

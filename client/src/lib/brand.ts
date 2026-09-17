@@ -18,3 +18,10 @@ export const SUPPLIERS = {
 } as const
 
 export const DEPOTS = ['Depot A', 'Depot B'] as const
+
+/** Label on the grey bar that stands in for a withheld record-level value. */
+export const REDACTED_LABEL = 'Redacted for public demo'
+/** Chip shown beside every dashboard's data cutoff. */
+export const SYNTHETIC_LABEL = 'Synthetic data'
+export const SYNTHETIC_NOTE =
+  'Every figure is generated from a fixed seed; nothing is derived from the employer’s records. Suppliers, depots and vendors are placeholders.'

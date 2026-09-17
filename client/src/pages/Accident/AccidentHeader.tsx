@@ -10,6 +10,7 @@ import {
 } from '@client/src/components/ui/select';
 import { ACCIDENT_CATEGORIES } from '@shared/accident';
 import { accidentApi } from '@client/src/api';
+import { SyntheticBadge } from '@client/src/components/SyntheticBadge';
 
 import type { AccidentFilters } from './useAccidentStats';
 
@@ -76,8 +77,9 @@ const AccidentHeader: React.FC<AccidentHeaderProps> = ({
         <h1 className="text-[22px] font-bold leading-7 text-[#084078]">
           Accident
         </h1>
-        <p className="mt-1 text-[12px] text-muted-foreground">
+        <p className="mt-1 flex items-center gap-2 text-[12px] text-muted-foreground">
           Data up to {cutoff ?? '—'}
+          <SyntheticBadge />
         </p>
       </div>
 

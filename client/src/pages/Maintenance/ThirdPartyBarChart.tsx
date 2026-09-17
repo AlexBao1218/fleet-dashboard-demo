@@ -7,6 +7,7 @@ import type { CallbackDataParams } from 'echarts/types/dist/shared';
 import { Skeleton } from '@client/src/components/ui/skeleton';
 import { Button } from '@client/src/components/ui/button';
 import { fmtInt, fmtNumber } from '@client/src/utils/format';
+import { REDACTED_LABEL } from '@/lib/brand';
 import type { ThirdPartyCost } from '@shared/maintenance';
 
 import { THIRD_PARTY_BAR_COLOR, TEXT_COLOR, GRID_COLOR, PANEL_BORDER } from './maintColors';
@@ -30,7 +31,9 @@ const ThirdPartyBarChart: React.FC<ThirdPartyBarChartProps> = ({
     const sorted = [...data].sort(
       (a: ThirdPartyCost, b: ThirdPartyCost) => b.cost - a.cost,
     );
-    const names = sorted.map((d: ThirdPartyCost) => d.name);
+    // Vendor names are withheld: the axis shows the rank and a grey bar,
+    // the tooltip says so, and the cost keeps its place in the ranking.
+    const names = sorted.map((_: ThirdPartyCost, i: number) => `#${i + 1}`);
     const values = sorted.map((d: ThirdPartyCost) => d.cost);
     // Axis scales with the data: four ticks, rounded up to a clean $K step.
     const maxValue: number = values.length > 0 ? Math.max(...values) : 0;
@@ -41,7 +44,7 @@ const ThirdPartyBarChart: React.FC<ThirdPartyBarChartProps> = ({
       tooltip: {
         trigger: 'item',
         formatter: (p: CallbackDataParams) =>
-          `${p.name}<br/>$${fmtNumber(Number(p.value), 2)}`,
+          `${p.name} · ${REDACTED_LABEL}<br/>$${fmtNumber(Number(p.value), 2)}`,
       },
       grid: {
         left: 8,
@@ -79,8 +82,16 @@ const ThirdPartyBarChart: React.FC<ThirdPartyBarChartProps> = ({
         axisLabel: {
           color: TEXT_COLOR,
           fontSize: 11,
-          width: 80,
-          overflow: 'truncate' as const,
+          formatter: (value: string) => `${value} {bar|}`,
+          rich: {
+            bar: {
+              backgroundColor: '#e4e3df',
+              width: 52,
+              height: 11,
+              borderRadius: 2,
+              verticalAlign: 'middle',
+            },
+          },
         },
       },
       series: [

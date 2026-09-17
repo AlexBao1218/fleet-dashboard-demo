@@ -34,7 +34,7 @@ export interface EvElectricityCardProps {
 }
 
 const EV_ELECTRICITY_HINT =
-  "上传当月的 Electricity_Calculation_YYYYMM.xlsx。只读取 sheet 'data'。月份默认取自文件名，如有不符请手动修改。";
+  "上传当月的用电汇总表（.xlsx）。月份默认取自文件名，如有不符请手动修改。";
 
 const MONTH_PATTERN = /^\d{4}-(0[1-9]|1[0-2])$/;
 const FILE_MONTH_PATTERN = /(\d{6})/;

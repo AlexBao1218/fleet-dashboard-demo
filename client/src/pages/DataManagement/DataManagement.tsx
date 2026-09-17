@@ -53,7 +53,7 @@ const DataManagement = () => {
               Data Management
             </h1>
             <p className="mt-1 text-sm text-muted-foreground">
-              Upload fleet data, maintain reference tables and review history.
+              Upload fleet data, maintain reference tables and review history. Demo: uploads are disabled; edits stay in your browser.
             </p>
           </div>
           <ExportDataDropdown />
