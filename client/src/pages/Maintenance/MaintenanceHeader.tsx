@@ -96,90 +96,6 @@ const FitNumber: React.FC<FitNumberProps> = ({ text, maxSize = 40 }) => {
 const SELECT_TRIGGER_CLASS =
   'h-8 w-full rounded-[2px] border-[#bfbfbf] bg-white text-[13px] text-[#1a1a1a]';
 
-export interface MaintenanceHeaderLeftProps {
-  vehicleType: string;
-  avgAvailability: number | null;
-  onVehicleTypeChange: (v: string) => void;
-}
-
-export const MaintenanceHeaderLeft: React.FC<MaintenanceHeaderLeftProps> = ({
-  vehicleType,
-  avgAvailability,
-  onVehicleTypeChange,
-}) => {
-  const [cutoff, setCutoff] = useState<string | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    maintenanceApi
-      .fetchMaintDataCutoff()
-      .then((res) => {
-        if (cancelled) return;
-        setCutoff(res.month);
-      })
-      .catch((err: unknown) => {
-        if (cancelled) return;
-        logger.error(`Failed to load maint data cutoff: ${JSON.stringify(err)}`);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  const availDisplay = avgAvailability !== null ? `${avgAvailability.toFixed(2)}%` : '—';
-  const availExact =
-    avgAvailability !== null ? `${fmtNumber(avgAvailability, 2)}%` : 'No data';
-
-  return (
-    <div className="flex flex-wrap items-start gap-x-8 gap-y-4">
-      <div className="flex min-w-[150px] flex-col">
-        <h1 className="text-[22px] font-bold leading-7 text-[#084078]">Maintenance</h1>
-        <p className="mt-1 flex items-center gap-2 text-[12px] text-muted-foreground">
-          Data up to {cutoff ?? '—'}
-          <SyntheticBadge />
-        </p>
-      </div>
-
-      <TooltipProvider delayDuration={200}>
-        <div className="w-[260px]">
-          <p className="mb-1 text-center text-[14px] font-semibold text-[#1a1a1a]">
-            Average Availability %
-          </p>
-          <div
-            className="flex h-[92px] items-center justify-center rounded-[2px] border bg-white px-3"
-            style={{ borderColor: CARD_BORDER }}
-          >
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <div className="w-full cursor-default">
-                  <FitNumber text={availDisplay} maxSize={52} />
-                </div>
-              </TooltipTrigger>
-              <TooltipContent>{availExact}</TooltipContent>
-            </Tooltip>
-          </div>
-        </div>
-      </TooltipProvider>
-
-      <div className="w-[220px] pt-7">
-        <p className="mb-1 text-[14px] font-semibold text-[#1a1a1a]">Vehicle Type</p>
-        <Select value={vehicleType} onValueChange={onVehicleTypeChange}>
-          <SelectTrigger className={SELECT_TRIGGER_CLASS}>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {VEHICLE_TYPE_OPTIONS.map((opt) => (
-              <SelectItem key={opt.value} value={opt.value}>
-                {opt.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-    </div>
-  );
-};
-
 export interface MaintenanceHeaderRightProps {
   year: number;
   quarter: string;
@@ -215,6 +131,74 @@ const StatCard: React.FC<StatCardProps> = ({ title, display, exact }) => (
     </div>
   </div>
 );
+
+export interface MaintenanceHeaderLeftProps {
+  vehicleType: string;
+  avgAvailability: number | null;
+  onVehicleTypeChange: (v: string) => void;
+}
+
+export const MaintenanceHeaderLeft: React.FC<MaintenanceHeaderLeftProps> = ({
+  vehicleType,
+  avgAvailability,
+  onVehicleTypeChange,
+}) => {
+  const [cutoff, setCutoff] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    maintenanceApi
+      .fetchMaintDataCutoff()
+      .then((res) => {
+        if (cancelled) return;
+        setCutoff(res.month);
+      })
+      .catch((err: unknown) => {
+        if (cancelled) return;
+        logger.error(`Failed to load maint data cutoff: ${JSON.stringify(err)}`);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const availDisplay = avgAvailability !== null ? `${avgAvailability.toFixed(2)}%` : '—';
+  const availExact =
+    avgAvailability !== null ? `${fmtNumber(avgAvailability, 2)}%` : 'No data';
+
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
+        <div className="flex min-w-0 flex-col">
+          <h1 className="text-[22px] font-bold leading-7 text-[#084078]">Maintenance</h1>
+          <p className="mt-1 flex items-center gap-2 text-[12px] text-muted-foreground">
+            Data up to {cutoff ?? '—'}
+            <SyntheticBadge />
+          </p>
+        </div>
+        <div className="flex w-[200px] flex-col gap-1">
+          <p className="text-[13px] font-semibold text-[#1a1a1a]">Vehicle Type</p>
+          <Select value={vehicleType} onValueChange={onVehicleTypeChange}>
+            <SelectTrigger className={SELECT_TRIGGER_CLASS}>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {VEHICLE_TYPE_OPTIONS.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+
+      <TooltipProvider delayDuration={200}>
+        <StatCard title="Average Availability %" display={availDisplay} exact={availExact} />
+      </TooltipProvider>
+    </div>
+  );
+};
 
 export const MaintenanceHeaderRight: React.FC<MaintenanceHeaderRightProps> = ({
   year,

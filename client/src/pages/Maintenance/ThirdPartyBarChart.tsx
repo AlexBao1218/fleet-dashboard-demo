@@ -72,11 +72,6 @@ const ThirdPartyBarChart: React.FC<ThirdPartyBarChartProps> = ({
         type: 'category',
         data: names,
         inverse: true,
-        name: 'ThirdPartyName',
-        nameLocation: 'middle',
-        nameRotate: 90,
-        nameGap: 96,
-        nameTextStyle: { color: TEXT_COLOR, fontSize: 11 },
         axisLine: { show: false },
         axisTick: { show: false },
         axisLabel: {
@@ -119,7 +114,10 @@ const ThirdPartyBarChart: React.FC<ThirdPartyBarChartProps> = ({
       className={`flex flex-col rounded-none border bg-white p-2 ${className}`}
       style={{ borderColor: PANEL_BORDER }}
     >
-      {loading && <Skeleton className="min-h-0 flex-1 w-full" />}
+      <h2 className="text-center text-[15px] font-semibold text-[#1a1a1a]">
+        Third-Party Cost by Vendor
+      </h2>
+      {loading && <Skeleton className="mt-2 min-h-0 flex-1 w-full" />}
       {!loading && error && (
         <div className="flex min-h-0 flex-1 flex-col items-center justify-center gap-3">
           <p className="text-sm text-destructive">{error}</p>

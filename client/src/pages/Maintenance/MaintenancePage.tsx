@@ -33,9 +33,9 @@ const MaintenancePage: React.FC = () => {
   const retry = stats.retry;
 
   return (
-    <div className="min-h-full bg-white p-3">
-      <div className="grid grid-cols-1 gap-3 xl:grid-cols-[57fr_43fr]">
-        <div className="flex min-w-0 flex-col gap-3">
+    <div className="min-h-full bg-white p-6">
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-[57fr_43fr]">
+        <div className="flex min-w-0 flex-col gap-4">
           <MaintenanceHeaderLeft
             vehicleType={stats.vehicleType}
             avgAvailability={d?.avgAvailability ?? null}
@@ -50,8 +50,8 @@ const MaintenancePage: React.FC = () => {
             onRetry={retry}
           />
 
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-[42fr_58fr]">
-            <div className="flex min-w-0 flex-col gap-3">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-[42fr_58fr]">
+            <div className="flex min-w-0 flex-col gap-4">
               <DepotPieChart
                 className="h-[280px]"
                 data={d?.depotCounts ?? []}
@@ -77,7 +77,7 @@ const MaintenancePage: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex min-w-0 flex-col gap-3">
+        <div className="flex min-w-0 flex-col gap-4">
           <MaintenanceHeaderRight
             year={stats.year}
             quarter={stats.quarter}
