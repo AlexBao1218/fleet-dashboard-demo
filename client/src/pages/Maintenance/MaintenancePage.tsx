@@ -43,7 +43,7 @@ const MaintenancePage: React.FC = () => {
           />
 
           <AvailabilityLineChart
-            className="h-[280px]"
+            className="h-[220px]"
             data={d?.availabilitySeries ?? []}
             loading={loading}
             error={error}
@@ -53,14 +53,14 @@ const MaintenancePage: React.FC = () => {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-[42fr_58fr]">
             <div className="flex min-w-0 flex-col gap-4">
               <DepotPieChart
-                className="h-[280px]"
+                className="h-[220px]"
                 data={d?.depotCounts ?? []}
                 loading={loading}
                 error={error}
                 onRetry={retry}
               />
               <VehicleTypePieChart
-                className="h-[340px]"
+                className="h-[280px]"
                 data={d?.vehicleTypeCounts ?? []}
                 loading={loading}
                 error={error}
@@ -90,7 +90,7 @@ const MaintenancePage: React.FC = () => {
           />
 
           <CostStackedBarChart
-            className=""
+            className="min-h-0 flex-1"
             data={d?.costByOrderType ?? []}
             title="Cost of Maintenance Order"
             yAxisName="Order_Type"
@@ -99,7 +99,7 @@ const MaintenancePage: React.FC = () => {
             onRetry={retry}
           />
           <CostStackedBarChart
-            className=""
+            className="min-h-0 flex-1"
             data={d?.costByVehicleType ?? []}
             title="Cost of Maintenance Order by Vehicle Type"
             yAxisName="Vehicle Type"

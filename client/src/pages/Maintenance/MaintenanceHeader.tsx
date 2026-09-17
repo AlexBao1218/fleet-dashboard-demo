@@ -117,13 +117,13 @@ const StatCard: React.FC<StatCardProps> = ({ title, display, exact }) => (
   <div className="min-w-0">
     <p className="mb-1 truncate text-[14px] font-semibold text-[#1a1a1a]">{title}</p>
     <div
-      className="flex h-[84px] items-center justify-center rounded-[2px] border bg-white px-3"
+      className="flex h-[72px] items-center justify-center rounded-[2px] border bg-white px-3"
       style={{ borderColor: CARD_BORDER }}
     >
       <Tooltip>
         <TooltipTrigger asChild>
           <div className="w-full cursor-default">
-            <FitNumber text={display} maxSize={44} />
+            <FitNumber text={display} maxSize={40} />
           </div>
         </TooltipTrigger>
         <TooltipContent>{exact}</TooltipContent>
