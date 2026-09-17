@@ -15,7 +15,7 @@ import type { UploadLog } from '@shared/upload-log'
 import { DEMO_USER_NAME, DEPOTS, SUPPLIERS } from '@/lib/brand'
 import { SYSTEM_GUIDE_MARKDOWN } from './system-guide'
 
-export const STORE_VERSION = 3
+export const STORE_VERSION = 4
 
 /** Last month with data — the dashboards show "Data up to 2026-08". */
 export const CUTOFF = { year: 2026, month: 8 } as const
