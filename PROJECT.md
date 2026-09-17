@@ -16,7 +16,7 @@
 | 位置 | 地址 |
 |---|---|
 | 本地 | `~/Desktop/fleet-dashboard-demo` |
-| GitHub | 未推送（见"发布"） |
+| GitHub | https://github.com/AlexBao1218/fleet-dashboard-demo（目前 **private**，确认没问题后再改 public） |
 | 线上 | 未部署，计划 `dashboard-demo.zijun.cloud` |
 | 原始导出包 | `~/Downloads/dashboard.zip`（含 AGENTS.md 里的内部设计说明和原 README，不要上传到任何地方） |
 
@@ -55,11 +55,7 @@ cd ~/Desktop/fleet-dashboard-demo && npm run typecheck && npm run lint && npm ru
 
 ### 发布
 
-```bash
-cd ~/Desktop/fleet-dashboard-demo && gh repo create fleet-dashboard-demo --private --source=. --push
-```
-
-自己过一遍后改 public：
+已推到 private 仓库（2026-09-17）。自己过一遍后改 public：
 
 ```bash
 cd ~/Desktop/fleet-dashboard-demo && gh repo edit --visibility public --accept-visibility-change-consequences
