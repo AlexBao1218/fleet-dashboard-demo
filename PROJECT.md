@@ -55,11 +55,7 @@ cd ~/Desktop/fleet-dashboard-demo && npm run typecheck && npm run lint && npm ru
 
 ### 发布
 
-已推到 private 仓库（2026-09-17）。自己过一遍后改 public：
-
-```bash
-cd ~/Desktop/fleet-dashboard-demo && gh repo edit --visibility public --accept-visibility-change-consequences
-```
+仓库已 public（2026-09-17）。改完代码 `git push` 即可；线上要重新发布见下一节。
 
 ### 部署到 Vercel
 
