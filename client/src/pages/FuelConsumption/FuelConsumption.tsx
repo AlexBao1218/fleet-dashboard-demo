@@ -1,3 +1,4 @@
+import { usePortfolioReady } from '@/lib/usePortfolioReady';
 import React from 'react';
 
 import { useFleetOverview } from './useFleetOverview';
@@ -26,6 +27,7 @@ const FuelConsumption: React.FC = () => {
 
   const statsLoading: boolean =
     fuelStats.statsLoading || efficiency.loading || evStats.loading;
+  usePortfolioReady(!statsLoading && !fleet.loading && !fuelStats.yearsLoading && !makeModelOpts.loading && (fuelStats.year === null || (fuelStats.statsSettled && (efficiency.data !== null || efficiency.error !== null) && (evStats.data !== null || evStats.error !== null))));
   const statsError: string | null =
     fuelStats.statsError || efficiency.error || evStats.error;
   const handleStatsRetry = (): void => {

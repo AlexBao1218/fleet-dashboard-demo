@@ -19,6 +19,7 @@ export interface UseFuelStatsResult {
   makeModel: string;
   yearsLoading: boolean;
   statsLoading: boolean;
+  statsSettled: boolean;
   statsError: string | null;
   monthly: FuelMonthlyPoint[];
   totals: FuelStatsTotals;
@@ -35,6 +36,7 @@ export function useFuelStats(): UseFuelStatsResult {
   const [month, setMonth] = useState<string>('all');
   const [vehClass, setVehClass] = useState<string>('all');
   const [makeModel, setMakeModel] = useState<string>('all');
+  const [statsSettled, setStatsSettled] = useState(false);
   const [statsLoading, setStatsLoading] = useState<boolean>(false);
   const [statsError, setStatsError] = useState<string | null>(null);
   const [monthly, setMonthly] = useState<FuelMonthlyPoint[]>([]);
@@ -65,6 +67,7 @@ export function useFuelStats(): UseFuelStatsResult {
       } finally {
         if (seq === requestSeq.current) {
           setStatsLoading(false);
+          setStatsSettled(true);
         }
       }
     },
@@ -92,7 +95,7 @@ export function useFuelStats(): UseFuelStatsResult {
 
   return {
     years, year, month, vehClass, makeModel,
-    yearsLoading, statsLoading,
+    yearsLoading, statsLoading, statsSettled,
     statsError: statsError ?? yearsError,
     monthly, totals, costByClass,
     setYear, setMonth, setVehClass: changeVehClass, setMakeModel, retry,

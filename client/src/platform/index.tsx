@@ -110,7 +110,10 @@ export const ErrorRender: React.FC<{ error: unknown; resetErrorBoundary?: (...ar
       {error instanceof Error ? error.message : String(error)}
     </pre>
     {resetErrorBoundary && (
-      <button type="button" className="mt-4 rounded-md border border-border px-3 py-1.5 text-sm" onClick={() => resetErrorBoundary()}>
+      <button type="button" className="mt-4 rounded-md border border-border px-3 py-1.5 text-sm" onClick={() => {
+      if (error instanceof Error && /dynamically imported module|module script|Loading chunk|Importing a module/i.test(error.message)) window.location.reload();
+      else resetErrorBoundary();
+    }}>
         Retry
       </button>
     )}

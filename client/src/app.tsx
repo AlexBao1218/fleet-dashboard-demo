@@ -1,16 +1,16 @@
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Layout from './components/Layout';
 import FuelConsumption from './pages/FuelConsumption/FuelConsumption';
-import MaintenancePage from './pages/Maintenance/MaintenancePage';
-import AccidentPage from './pages/Accident/AccidentPage';
-import DataManagement from './pages/DataManagement/DataManagement';
+const MaintenancePage = lazy(() => import('./pages/Maintenance/MaintenancePage'));
+const AccidentPage = lazy(() => import('./pages/Accident/AccidentPage'));
+const DataManagement = lazy(() => import('./pages/DataManagement/DataManagement'));
 import NotFound from './pages/NotFound/NotFound';
 
 const RoutesComponent = () => {
   return (
-    <Routes>
+    <Suspense fallback={<div role="status" style={{padding:24}}>Loading…</div>}><Routes>
       <Route element={<Layout />}>
         <Route index element={<Navigate to="/fuel-consumption" replace />} />
         <Route path="fuel-consumption" element={<FuelConsumption />} />
@@ -27,7 +27,7 @@ const RoutesComponent = () => {
         />
       </Route>
       <Route path="*" element={<NotFound />} />
-    </Routes>
+    </Routes></Suspense>
   );
 };
 
